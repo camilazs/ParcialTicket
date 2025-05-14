@@ -1,0 +1,152 @@
+@import "tailwindcss";
+
+@theme {
+  /* Tipografía */
+  --font-inter: "Inter", sans-serif;
+
+  /* Colores */
+  --bp-page-bg: #4CDBC4;       /* Fondo de la página */
+  --bp-bg-pass: #ffffff;       /* Fondo de la tarjeta (boarding pass) */
+  --bp-red: #dc2626;           /* Franja roja lateral */
+  --bp-text-white: #ffffff;
+  --bp-text-black: #000000;
+  --bp-text-gray: #6b7280;
+  --bp-divider: #4CDBC4;       /* Color usado para los “recortes” del divider */
+
+  /* Dimensiones y tamaños de texto */
+  --bp-width: 320px;           /* Ancho máximo de la tarjeta */
+  --bp-heading: 40px;          /* Tamaño para los códigos (e.g. LOS, ABV) */
+  --bp-detail: 18px;           /* Para etiquetas y datos */
+
+  /* Espaciados */
+  --bp-padding: 1.25rem;       /* p-5 */
+  --bp-pl: 1.75rem;            /* pl-7 */
+
+  /* Bordes y sombras */
+  --bp-radius: 1rem;           /* Aproximadamente rounded-t-2xl */
+  --bp-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+}
+
+/* Utilidades y componentes personalizados */
+@layer components {
+  /* Contenedor principal de la tarjeta */
+  .boarding-pass {
+    /* La tarjeta es completamente responsive y conserva las proporciones */
+    width: 100%;
+    max-width: var(--bp-width);
+    /* Fondo blanco, bordes redondeados y sombra */
+    background-color: var(--bp-bg-pass);
+    border-radius: var(--bp-radius);
+    box-shadow: var(--bp-shadow);
+    position: relative;
+    overflow: hidden;
+  }
+
+  /* Franja roja lateral */
+  .bp-red-stripe {
+    position: absolute;
+    left: 0;
+    top: 0;
+    height: 100%;
+    width: 0.5rem; /* 2rem equivaldría a w-2 */
+    background-color: var(--bp-red);
+  }
+
+  /* Sección superior (top) de la tarjeta */
+  .bp-top {
+    padding: var(--bp-padding) var(--bp-padding) 0 var(--bp-pl);
+  }
+  .bp-flight-info {
+    display: flex;
+    justify-content: space-between;
+  }
+  .bp-date {
+    margin-top: 0.5rem;
+    text-align: center;
+    font-size: 0.75rem; /* text-xs */
+    color: #6b7280;
+  }
+
+  /* Divider con línea punteada y recortes laterales */
+  .bp-divider {
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  .bp-divider-line {
+    height: 1px;
+    width: 100%;
+    border-top: 1px dashed #d1d5db; /* border-gray-300 */
+  }
+  .bp-divider-dot-left, .bp-divider-dot-right {
+    position: absolute;
+    height: 1rem;
+    width: 1rem;
+    border-radius: 9999px;
+    background-color: var(--bp-divider);
+  }
+  .bp-divider-dot-left { left: -0.5rem; }
+  .bp-divider-dot-right { right: -0.5rem; }
+
+  /* Sección inferior (bottom) de la tarjeta */
+  .bp-bottom {
+    padding: var(--bp-padding) var(--bp-padding) var(--bp-padding) var(--bp-pl);
+  }
+  .bp-passenger-info {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 1rem;
+  }
+  .bp-passenger-label {
+    font-size: 0.75rem; /* text-xs */
+    color: #6b7280;
+  }
+  .bp-passenger-value {
+    font-size: 0.875rem; /* text-sm */
+    font-weight: bold;
+  }
+  .bp-detail-row {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 1rem;
+  }
+  .bp-detail-label {
+    font-size: 0.75rem;
+    color: #6b7280;
+  }
+  .bp-detail-value {
+    font-size: 0.875rem;
+    font-weight: bold;
+  }
+  .bp-qr {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-top: 1rem;
+  }
+  .bp-website {
+    font-size: 0.75rem;
+    color: #6b7280;
+  }
+  .bp-seat-website {
+    display: flex;
+    align-items: end;
+    justify-content: space-between;
+  }
+  .bp-seat-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    border: 1px solid #d1d5db; /* border-gray-300 */
+    padding: 0.5rem;
+  }
+  .bp-seat-label {
+    font-size: 0.75rem;
+    color: #6b7280;
+  }
+  .bp-seat-value {
+    font-size: 1.125rem; /* text-lg */
+    font-weight: bold;
+  }
+}
